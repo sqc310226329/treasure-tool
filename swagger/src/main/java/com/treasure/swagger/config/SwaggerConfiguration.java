@@ -1,13 +1,13 @@
 
 package com.treasure.swagger.config;
 
-import com.fasterxml.classmate.ResolvedType;
 import com.fasterxml.classmate.TypeResolver;
 import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import com.google.common.collect.Lists;
 import com.treasure.swagger.extend.DeveloperApiInfo;
 import com.treasure.swagger.extend.DeveloperApiInfoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -29,9 +29,6 @@ import java.util.List;
 @Import(BeanValidatorPluginsConfiguration.class)
 public class SwaggerConfiguration {
 
-
-
-
     private final TypeResolver typeResolver;
 
     @Autowired
@@ -39,47 +36,19 @@ public class SwaggerConfiguration {
         this.typeResolver = typeResolver;
     }
 
-    /*@Bean
-    public UiConfiguration uiConfiguration(){
-        return UiConfigurationBuilder.builder().supportedSubmitMethods(new String[]{})
-                .displayOperationId(true)
-                .build();
-    }*/
-
-
-    /*@Bean(value = "defaultApi")
-    public Docket defaultApi() {
-        ParameterBuilder parameterBuilder=new ParameterBuilder();
-        List<Parameter> parameters= Lists.newArrayList();
-        parameterBuilder.name("token").description("token令牌").modelRef(new ModelRef("String"))
-                .parameterType("header")
-                .required(true).build();
-        parameters.add(parameterBuilder.build());
-
-        Docket docket=new Docket(DocumentationType.SWAGGER_2)
-                .apiInfo(apiInfo())
-                .groupName("默认接口")
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.swagger.bootstrap.ui.demo.controller"))
-                //.apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
-                .paths(PathSelectors.any())
-                .build().globalOperationParameters(parameters)
-                .securityContexts(Lists.newArrayList(securityContext())).securitySchemes(Lists.<SecurityScheme>newArrayList(apiKey()));
-        return docket;
-    }*/
     @Bean(value = "groupRestApi")
+    @ConditionalOnMissingBean
     public Docket groupRestApi() {
-        List<ResolvedType> list=Lists.newArrayList();
-
-        //SpringAddtionalModel springAddtionalModel= springAddtionalModelService.scan("com.swagger.bootstrap.ui.demo.extend");
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(groupApiInfo())
-                .groupName("分组接口")
+                .groupName("我要测试啦")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.treasure.swagger.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.treasure.test.controller"))
                 .paths(PathSelectors.any())
                 .build()
-                .additionalModels(typeResolver.resolve(DeveloperApiInfo.class)).securityContexts(Lists.newArrayList(securityContext(),securityContext1())).securitySchemes(Lists.<SecurityScheme>newArrayList(apiKey(),apiKey1()));
+                .additionalModels(typeResolver.resolve(DeveloperApiInfo.class))
+                .securityContexts(Lists.newArrayList(securityContext(),securityContext1()))
+                .securitySchemes(Lists.<SecurityScheme>newArrayList(apiKey(),apiKey1()));
     }
 
     private ApiInfo groupApiInfo(){
@@ -96,16 +65,6 @@ public class SwaggerConfiguration {
                 .contact("group@qq.com")
                 .version("1.0")
                 .extensions(Lists.<VendorExtension>newArrayList(apiInfoExtension))
-                .build();
-    }
-
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("swagger-bootstrap-ui-demo RESTful APIs")
-                .description("# swagger-bootstrap-ui-demo RESTful APIs")
-                .termsOfServiceUrl("http://www.xx.com/")
-                .contact("xx@qq.com")
-                .version("1.0")
                 .build();
     }
 
