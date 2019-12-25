@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.treasure</groupId>
-    <artifactId>swagger</artifactId>
-    <version>0.0.7-SNAPSHOT</version>
-    <name>swagger</name>
+    <artifactId>swagger-treasure-starter</artifactId>
+    <version>0.0.8-SNAPSHOT</version>
+    <name>swagger-treasure-starter</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -44,6 +44,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>

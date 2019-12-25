@@ -8,6 +8,7 @@ import com.treasure.swagger.extend.DeveloperApiInfo;
 import com.treasure.swagger.extend.DeveloperApiInfoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -22,14 +23,19 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.List;
+import java.util.Objects;
 
 @Configuration
 @EnableSwagger2
 @EnableKnife4j
 @Import(BeanValidatorPluginsConfiguration.class)
+@EnableConfigurationProperties(SwaggerConfigProperties.class)
 public class SwaggerConfiguration {
 
     private final TypeResolver typeResolver;
+
+    @Autowired
+    private SwaggerConfigProperties swaggerConfigProperties;
 
     @Autowired
     public SwaggerConfiguration(TypeResolver typeResolver) {
@@ -41,7 +47,7 @@ public class SwaggerConfiguration {
     public Docket groupRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(groupApiInfo())
-                .groupName("我要测试啦")
+                .groupName(swaggerConfigProperties.getApplicationName())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.treasure.test.controller"))
                 .paths(PathSelectors.any())
