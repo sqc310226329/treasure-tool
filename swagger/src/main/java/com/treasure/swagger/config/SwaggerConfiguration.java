@@ -49,7 +49,7 @@ public class SwaggerConfiguration {
                 .apiInfo(groupApiInfo())
                 .groupName(swaggerConfigProperties.getApplicationName())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.treasure.test.controller"))
+                .apis(RequestHandlerSelectors.basePackage(swaggerConfigProperties.getBasePackage()))
                 .paths(PathSelectors.any())
                 .build()
                 .additionalModels(typeResolver.resolve(DeveloperApiInfo.class))
@@ -65,7 +65,7 @@ public class SwaggerConfiguration {
 
 
         return new ApiInfoBuilder()
-                .title("swagger-bootstrap-ui很棒~~~！！！")
+                .title("swagger-bootstrap-ui 接口文档")
                 .description("<div style='font-size:14px;color:red;'>swagger-bootstrap-ui-demo RESTful APIs</div>")
                 .termsOfServiceUrl("http://www.group.com/")
                 .contact("group@qq.com")
