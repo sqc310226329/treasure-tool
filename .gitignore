@@ -1,0 +1,21 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/.gitignore
+.idea/compiler.xml
+.idea/encodings.xml
+.idea/inspectionProfiles/
+.idea/libraries/
+.idea/misc.xml
+.idea/uiDesigner.xml
+.idea/vcs.xml
+common-tool/src/test/
+common-tool/target/
+treasure-tool.iml
+treasure/target/
+compiler.xml
+encodings.xml
+inspectionProfiles/
+libraries/
+misc.xml
+uiDesigner.xml
+vcs.xml
