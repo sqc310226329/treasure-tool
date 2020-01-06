@@ -12,12 +12,6 @@
     <groupId>com.treasure</groupId>
     <artifactId>common-tool</artifactId>
     <version>0.0.4-SNAPSHOT</version>
-    <properties>
-        <poi.ooxml>4.1.1</poi.ooxml>
-        <fastjson>1.2.58</fastjson>
-        <json-lib>2.4</json-lib>
-        <commons-io>2.0.1</commons-io>
-    </properties>
     <build>
         <plugins>
             <plugin>

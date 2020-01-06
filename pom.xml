@@ -12,6 +12,7 @@
         <module>treasure</module>
         <module>swagger</module>
         <module>common-tool</module>
+        <module>mybatis-plus</module>
     </modules>
     <properties>
         <spring.boot.version>2.1.9.RELEASE</spring.boot.version>
@@ -19,8 +20,11 @@
         <spring.platform.version>Cairo-SR8</spring.platform.version>
         <knife4j.version>2.0.1</knife4j.version>
         <swagger.ui>2.9.2</swagger.ui>
+        <poi.ooxml>4.1.1</poi.ooxml>
+        <fastjson>1.2.58</fastjson>
+        <json-lib>2.4</json-lib>
+        <commons-io>2.0.1</commons-io>
     </properties>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -44,6 +48,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
