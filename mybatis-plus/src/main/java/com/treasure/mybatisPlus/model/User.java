@@ -1,8 +1,9 @@
 package com.treasure.mybatisPlus.model;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -15,9 +16,15 @@ import lombok.Data;
  */
 @Data
 public class User {
-    @TableField()
     private Long id;
     private String name;
     private Integer age;
     private String email;
+    @TableLogic
+    private int isDeleted;
+    private GradeEnum gradle;
+    @TableField(fill = FieldFill.INSERT)
+    private String createTime;
+    @TableField(fill = FieldFill.UPDATE)
+    private String updateTime;
 }
