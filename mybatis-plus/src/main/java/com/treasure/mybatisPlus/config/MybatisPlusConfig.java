@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @MapperScan("com.treasure.**.mapper.**")
 @PropertySource(
-        value = "classpath:/bootybay-mybatis.yml"
+        value = "classpath:/application.yml"
 )
 public class MybatisPlusConfig {
 

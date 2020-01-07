@@ -13,7 +13,6 @@
         <module>swagger</module>
         <module>common-tool</module>
         <module>mybatis-plus</module>
-        <module>mybatis-plus-treasure-starter</module>
         <module>mybatisPlus-treasure-starter</module>
     </modules>
     <properties>
