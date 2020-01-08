@@ -1,56 +1,38 @@
 package com.treasure.mybatisPlus.yml;
 
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import org.springframework.boot.env.OriginTrackedMapPropertySource;
-import org.springframework.boot.env.YamlPropertySourceLoader;
-import org.springframework.core.env.MapPropertySource;
+import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
+import org.springframework.core.env.PropertiesPropertySource;
 import org.springframework.core.env.PropertySource;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.DefaultPropertySourceFactory;
 import org.springframework.core.io.support.EncodedResource;
 import org.springframework.lang.Nullable;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Stream;
+import java.util.Properties;
 
 /**
- * yml配置加载
+ * <p>
+ * 简述一下～
+ * <p>
  *
+ * @author 时前程 2020年01月08日
+ * @see
+ * @since 1.0
  */
 public class YmlPropertyLoaderFactory extends DefaultPropertySourceFactory {
 
-	@Override
-	public PropertySource<?> createPropertySource(@Nullable String name, EncodedResource encodedResource) throws IOException {
-		if (encodedResource == null) {
-			return emptyPropertySource(name);
-		}
-		Resource resource = encodedResource.getResource();
-		String fileName = resource.getFilename();
-		List<PropertySource<?>> sources = new YamlPropertySourceLoader().load(fileName, resource);
-		if (sources.isEmpty()) {
-			return emptyPropertySource(fileName);
-		}
-		// yml 数据存储，合成一个 PropertySource
-		Map<String, Object> ymlDataMap = new HashMap<>(32);
-		for (PropertySource<?> source : sources) {
-			ymlDataMap.putAll(((MapPropertySource) source).getSource());
-		}
-		return new OriginTrackedMapPropertySource(getSourceName(fileName, name), ymlDataMap);
-	}
-
-	private static PropertySource<?> emptyPropertySource(@Nullable String name) {
-		return new MapPropertySource(getSourceName(name), Collections.emptyMap());
-	}
-
-	private static String getSourceName(String... names) {
-		return Stream.of(names)
-			.filter(StringUtils::isNotBlank)
-			.findFirst()
-			.orElse("BootyBayYmlPropertySource");
-	}
-
+    @Override
+    public PropertySource<?> createPropertySource(@Nullable String name, EncodedResource resource) throws IOException {
+        String sourceName = (name == null) ? resource.getResource().getFilename() : name;
+        assert sourceName != null;
+        if (sourceName.endsWith(".yml") || sourceName.endsWith(".yaml")) {
+            YamlPropertiesFactoryBean factory = new YamlPropertiesFactoryBean();
+            factory.setResources(resource.getResource());
+            factory.afterPropertiesSet();
+            Properties properties = factory.getObject();
+            assert properties != null;
+            return new PropertiesPropertySource(sourceName, properties);
+        }
+        return super.createPropertySource(name, resource);
+    }
 }

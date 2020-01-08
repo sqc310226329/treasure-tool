@@ -25,7 +25,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan("com.treasure.**.mapper.**")
 @PropertySource(
         value = "classpath:/treasure-mybatis.yml",
-        factory = YmlPropertyLoaderFactory.class
+        factory = YmlPropertyLoaderFactory.class,
+        encoding="UTF-8"
 )
 public class MybatisPlusConfig {
 
