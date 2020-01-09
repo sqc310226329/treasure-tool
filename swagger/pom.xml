@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.treasure</groupId>
     <artifactId>swagger-treasure-starter</artifactId>
-    <version>0.0.11-SNAPSHOT</version>
+    <version>0.0.14-SNAPSHOT</version>
     <name>swagger-treasure-starter</name>
     <description>Demo project for Spring Boot</description>
 

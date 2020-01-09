@@ -8,10 +8,12 @@ import com.treasure.swagger.extend.DeveloperApiInfo;
 import com.treasure.swagger.extend.DeveloperApiInfoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Profile;
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -30,6 +32,8 @@ import java.util.Objects;
 @EnableKnife4j
 @Import(BeanValidatorPluginsConfiguration.class)
 @EnableConfigurationProperties(SwaggerConfigProperties.class)
+//@ConditionalOnProperty(name = "swagger.enable", havingValue = "true")
+@Profile({"dev","test"})
 public class SwaggerConfiguration {
 
     private final TypeResolver typeResolver;
