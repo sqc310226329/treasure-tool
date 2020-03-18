@@ -36,6 +36,25 @@ public class  CreateExcel {
      *         }
      * @param templateParams
      */
+    public static void main(String[] args) {
+        ExcelTemplateParams templateParams = new ExcelTemplateParams();
+        templateParams.setFileName("D:/平台客户汽运导入模板.xlsx");
+        templateParams.setFirstRow(1);
+        templateParams.setLastRow(20000);
+        templateParams.setFlag(true);
+        templateParams.setRowIndex(0);
+        templateParams.setSheetName("平台客户汽运导入模板");
+        templateParams.setParamsList(Arrays.asList(new ExcelTemplateParams.MenuParams("f",3),
+                new ExcelTemplateParams.MenuParams("j",3)));
+        String path = getClass().getClassLoader().getResource("test.json").toString();
+        System.out.println(path);
+        path = path.replace("\\", "/");
+        if (path.contains(":")) {
+            path = path.replace("file:/", "");// 2
+        }
+        templateParams.setReadFilepath(path);
+        new CreateExcel().createExcelTemplate2007(templateParams);
+    }
     public static void createExcelTemplate2007(ExcelTemplateParams templateParams){
 
         try {
